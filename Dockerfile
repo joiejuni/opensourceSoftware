@@ -1,5 +1,6 @@
-FROM ubuntu:20.04
-RUN apt-get update && apt-get -y install build-essential && mkdir –p /app
-COPY . /app/
-WORKDIR /app/
-CMD make
+FROM openjdk:17
+ARG JAR_FILE=build/libs/*.jar
+COPY ${JAR_FILE} app.jar
+VOLUME /tmp
+EXPOSE 8080
+ENTRYPOINT ["java","-jar","/app.jar"]
