@@ -6,6 +6,7 @@ pipeline {
             steps {
                 script {
                     // Spring Boot 프로젝트 빌드
+                    sh 'chmod +x gradlew'
                     sh './gradlew clean build --warning-mode all'
                 }
             }
