@@ -1,5 +1,10 @@
 pipeline {
     agent any
+    environment {
+            registry = 'https://hub.docker.com/r/julia2039/springboot'
+            imageName = 'https://hub.docker.com/r/julia2039/springboot/julia2039/springboot:1.0'
+            dockerImage = ''
+    }
 
     stages {
         stage('Build Spring Boot Project') {
@@ -57,6 +62,13 @@ pipeline {
                     sh 'docker rmi -f $(docker images -f "dangling=true" -q) || true'
                 }
             }
+        }
+
+    }
+
+    post {
+        always {
+            cleanWs()
         }
     }
 }
