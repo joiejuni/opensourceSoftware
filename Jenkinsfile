@@ -14,8 +14,8 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    // Docker 이미지 빌드
-                    docker.build("jiwonlee42/spring-boot:1.0", ".")
+                    // Docker 이미지 빌드. 만들 이미지명 명시 (username/repository name)
+                    docker.build("julia2039/springboot:1.0", ".")
                 }
             }
         }
@@ -24,8 +24,8 @@ pipeline {
             steps {
                 script {
                     // Docker 이미지를 Docker Hub로 푸시
-                    docker.withRegistry('https://registry.hub.docker.com', 'jiwonlee42') {
-                        docker.image("jiwonlee42/spring-boot:1.0").push()
+                    docker.withRegistry('https://registry.hub.docker.com', 'julia2039') {
+                        docker.image("julia2039/springboot:1.0").push()
                     }
                 }
             }
@@ -44,7 +44,7 @@ pipeline {
             steps {
                 script {
                     // Docker 컨테이너 실행
-                    sh 'docker run -p 8081:8080 -d --name=spring-boot-server jiwonlee42/spring-boot:1.0'
+                    sh 'docker run -p 8081:8080 -d --name=spring-boot-server julia2039/springboot:1.0'
                 }
             }
         }
