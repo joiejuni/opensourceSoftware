@@ -34,7 +34,7 @@ pipeline {
         stage('Stop and Remove Existing Container') {
             steps {
                 script {
-                    // 기존에 동작 중인 컨테이너 중지 및 삭제
+                    // 기존에 동작 중인 컨테이너 중지 및 삭제함
                     sh 'docker ps -q --filter "name=spring-boot-server" | grep -q . && docker stop spring-boot-server && docker rm spring-boot-server || true'
                 }
             }
