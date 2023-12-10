@@ -16,7 +16,7 @@ pipeline {
             steps {
                 script {
                     // Docker 이미지 빌드. 만들 이미지명 명시 (username/repository name)
-                    docker.build("julia2039/springboot:1.0", ".")
+                    docker.build("julia2039/springboot:1.0", "-f Dockerfile .")
                 }
             }
         }
