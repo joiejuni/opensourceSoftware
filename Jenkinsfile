@@ -1,9 +1,9 @@
 pipeline {
     agent any
     environment {
-            PROJECT_ID = 'open-new-407603'
-            CLUSTER_NAME = 'kube'
-            LOCATION = 'asia-northeast3-a'
+//             PROJECT_ID = 'open-new-407603'
+//             CLUSTER_NAME = 'kube'
+//             LOCATION = 'asia-northeast3-a'
             CREDENTIALS_ID = '44b4916c-2f25-4b4c-a1ca-7d0d75fe9107'
             registry = 'https://hub.docker.com/r/julia2039/springboot'
             imageName = 'https://hub.docker.com/r/julia2039/springboot/julia2039/springboot:1.0'
