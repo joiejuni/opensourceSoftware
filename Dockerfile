@@ -1,10 +1,10 @@
 # OpenJDK 17 이미지 사용
 FROM openjdk:17-jdk-slim
 
-
 # Gradle 다운로드 및 설치
 RUN mkdir /opt/gradle
 WORKDIR /opt/gradle
+RUN apt-get update && apt-get install -y curl
 RUN curl -L https://services.gradle.org/distributions/gradle-7.3-bin.zip -o gradle-7.3-bin.zip
 RUN unzip -d /opt/gradle gradle-7.3-bin.zip
 ENV PATH="/opt/gradle/gradle-7.3/bin:${PATH}"
