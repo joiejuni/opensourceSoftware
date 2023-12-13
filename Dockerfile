@@ -5,9 +5,9 @@ FROM openjdk:17-jdk-slim
 RUN mkdir /opt/gradle
 WORKDIR /opt/gradle
 RUN apt-get update && apt-get install -y curl unzip
-RUN curl -L https://services.gradle.org/distributions/gradle-7.3-bin.zip -o gradle-7.3-bin.zip
-RUN unzip -d /opt/gradle gradle-7.3-bin.zip
-ENV PATH="/opt/gradle/gradle-7.3/bin:${PATH}"
+RUN curl -L https://services.gradle.org/distributions/gradle-7.4-bin.zip -o gradle-7.4-bin.zip
+RUN unzip -d /opt/gradle gradle-7.4-bin.zip
+ENV PATH="/opt/gradle/gradle-7.4/bin:${PATH}"
 
 
 
@@ -20,7 +20,11 @@ COPY settings.gradle .
 COPY src src
 
 # 애플리케이션 빌드
-RUN gradle build
+WORKDIR /app
+COPY build.gradle .
+COPY settings.gradle .
+COPY src src
+RUN /opt/gradle/gradle-7.4/bin/gradle build
 
 # 엔트리 포인트 설정
 CMD ["java", "-jar", "build/libs/your-application.jar"]
