@@ -50,6 +50,15 @@ pipeline {
             }
         }
 
+        stage('Clean Up Unused Docker Images') {
+            steps {
+                script {
+                    // 태그가 겹친 이미지 삭제
+                    sh 'docker rmi -f $(docker images -f "dangling=true" -q) || true'
+                }
+            }
+        }
+
 //         stage('Stop and Remove Existing Container') {
 //             steps {
 //                 script {
@@ -80,14 +89,14 @@ pipeline {
 //             }
 //         }
 
-        stage('Clean Up Unused Docker Images') {
-            steps {
-                script {
-                    // 태그가 겹친 이미지 삭제
-                    sh 'docker rmi -f $(docker images -f "dangling=true" -q) || true'
-                }
-            }
-        }
+//         stage('Clean Up Unused Docker Images') {
+//             steps {
+//                 script {
+//                     // 태그가 겹친 이미지 삭제
+//                     sh 'docker rmi -f $(docker images -f "dangling=true" -q) || true'
+//                 }
+//             }
+//         }
 
     }
 

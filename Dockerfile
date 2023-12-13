@@ -1,7 +1,26 @@
+# Use the official OpenJDK image as base image
+FROM openjdk:17 as build
+
+# Set the working directory
+WORKDIR /app
+
+# Copy Gradle files
+COPY build.gradle .
+COPY settings.gradle .
+
+# Copy the source code
+COPY src src
+
+# Build the application
+RUN ./gradlew build
+
+# Create a new image and copy the JAR file
 FROM openjdk:17
-ARG JAR_FILE=build/libs/*.jar
-COPY ${JAR_FILE} app.jar
+COPY --from=build /app/build/libs/*.jar app.jar
+
+# Set the volume and expose the port
 VOLUME /tmp
 EXPOSE 5000
-#RUN echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.cloud.google.com/apt cloud-sdk main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg && apt-get update -y && apt-get install google-cloud-sdk -y
-ENTRYPOINT ["java","-jar","/app.jar"]
+
+# Set the entry point to run the application
+ENTRYPOINT ["java", "-jar", "/app.jar"]
