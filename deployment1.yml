@@ -20,7 +20,7 @@ spec:
           image: julia2039/springboot:latest
           imagePullPolicy: Always
           ports:
-            - containerPort: 5000
+            - containerPort: 8080
               name: springboot
 ---
 apiVersion: v1
@@ -34,7 +34,7 @@ spec:
   ports:
     - protocol: TCP
       port: 80 # http 포트 open, 외부에 노출되는 port
-      targetPort: 5000 # 내부의 컨테이너에 전달되는 port
+      targetPort: 8080 # 내부의 컨테이너에 전달되는 port
   type: LoadBalancer
 #---
 #apiVersion: extensions/v1beta1
