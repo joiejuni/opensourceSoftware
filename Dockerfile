@@ -1,5 +1,4 @@
-# Use the official OpenJDK image as base image
-FROM openjdk:17 as build
+FROM openjdk:17
 
 # Install Gradle
 RUN apt-get update && apt-get install -y gradle
@@ -17,13 +16,14 @@ COPY src src
 # Build the application
 RUN gradle build
 
-# Create a new image and copy the JAR file
-FROM openjdk:17
-COPY --from=build /app/build/libs/*.jar app.jar
+# Copy the JAR file
+COPY build/libs/*.jar app.jar
 
-# Set the volume and expose the port
+# Volume for temporary storage
 VOLUME /tmp
+
+# Expose port 5000
 EXPOSE 5000
 
-# Set the entry point to run the application
-ENTRYPOINT ["java", "-jar", "/app.jar"]
+# Entry point
+ENTRYPOINT ["java", "-jar", "app.jar"]
