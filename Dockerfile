@@ -1,5 +1,5 @@
-# Debian 기반 이미지 사용
-FROM adoptopenjdk:17-jdk-debianslim
+# OpenJDK 17 이미지 사용
+FROM openjdk:17-jdk-slim
 
 # Gradle 다운로드 및 설치
 RUN mkdir /opt/gradle
