@@ -1,47 +1,47 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: springboot-app
+  name: mool
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
-      app: springboot-app
+      app: mool
   template:
     metadata:
       labels:
-        app: springboot-app
+        app: mool
     spec:
       containers:
-        - name: springboot-app
+        - name: mool
           image: julia2039/springboot:1.0
           ports:
             - containerPort: 8080
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: springboot-service
-spec:
-  selector:
-    app: springboot-app
-  ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 8080
----
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: springboot-ingress
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
-spec:
-  rules:
-    - host: 34.64.72.16
-      http:
-        paths:
-          - path: /
-            backend:
-              serviceName: springboot-service
-              servicePort: 80
+#---
+#apiVersion: v1
+#kind: Service
+#metadata:
+#  name: springboot-service
+#spec:
+#  selector:
+#    app: mool
+#  ports:
+#    - protocol: TCP
+#      port: 80
+#      targetPort: 8080
+#---
+#apiVersion: extensions/v1beta1
+#kind: Ingress
+#metadata:
+#  name: mool
+#  annotations:
+#    nginx.ingress.kubernetes.io/rewrite-target: /
+#spec:
+#  rules:
+#    - host: 34.64.72.16
+#      http:
+#        paths:
+#          - path: /
+#            backend:
+#              serviceName: springboot-service
+#              servicePort: 80

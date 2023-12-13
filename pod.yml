@@ -1,8 +1,8 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: nginx
+  name: mool
 spec:
   containers:
-    - name: nginx # 이름
-      image: nginx:latest
+    - name: mool # 이름
+      image: julia2039/springboot:1.0
