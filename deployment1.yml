@@ -17,18 +17,18 @@ spec:
           image: julia2039/springboot:1.0
           ports:
             - containerPort: 8080
-#---
-#apiVersion: v1
-#kind: Service
-#metadata:
-#  name: springboot-service
-#spec:
-#  selector:
-#    app: mool
-#  ports:
-#    - protocol: TCP
-#      port: 80
-#      targetPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: springboot-service
+spec:
+  selector:
+    app: mool
+  ports:
+    - protocol: TCP
+      port: 80 # http 포트 open
+      targetPort: 8080
 #---
 #apiVersion: extensions/v1beta1
 #kind: Ingress
