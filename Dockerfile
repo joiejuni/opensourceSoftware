@@ -1,6 +1,9 @@
 # Use the official OpenJDK image as base image
 FROM openjdk:17 as build
 
+# Install Gradle
+RUN apt-get update && apt-get install -y gradle
+
 # Set the working directory
 WORKDIR /app
 
@@ -12,7 +15,7 @@ COPY settings.gradle .
 COPY src src
 
 # Build the application
-RUN ./gradlew build
+RUN gradle build
 
 # Create a new image and copy the JAR file
 FROM openjdk:17

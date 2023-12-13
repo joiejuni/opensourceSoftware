@@ -16,7 +16,7 @@ spec:
         tier: springboot
     spec:
       containers:
-        - name: mool
+        - name: springboot
           image: julia2039/springboot:latest
           imagePullPolicy: Always
           ports:
