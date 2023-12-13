@@ -1,29 +1,23 @@
-FROM openjdk:17
+# Debian 기반 이미지 사용
+FROM adoptopenjdk:17-jdk-debianslim
 
-# Install Gradle
-RUN apt-get update && apt-get install -y gradle
+# Gradle 다운로드 및 설치
+RUN mkdir /opt/gradle
+WORKDIR /opt/gradle
+RUN wget https://services.gradle.org/distributions/gradle-7.3-bin.zip
+RUN unzip -d /opt/gradle gradle-7.3-bin.zip
+ENV PATH="/opt/gradle/gradle-7.3/bin:${PATH}"
 
-# Set the working directory
+# 작업 디렉토리 설정
 WORKDIR /app
 
-# Copy Gradle files
+# 애플리케이션 파일 복사
 COPY build.gradle .
 COPY settings.gradle .
-
-# Copy the source code
 COPY src src
 
-# Build the application
+# 애플리케이션 빌드
 RUN gradle build
 
-# Copy the JAR file
-COPY build/libs/*.jar app.jar
-
-# Volume for temporary storage
-VOLUME /tmp
-
-# Expose port 5000
-EXPOSE 5000
-
-# Entry point
-ENTRYPOINT ["java", "-jar", "app.jar"]
+# 엔트리 포인트 설정
+CMD ["java", "-jar", "build/libs/your-application.jar"]
