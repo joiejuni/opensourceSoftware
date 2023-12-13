@@ -41,7 +41,7 @@ pipeline {
             steps {
                 script {
                     // Docker 이미지를 Docker Hub로 푸시함
-                    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+                    docker.withRegistry('https://registry.hub.docker.com', 'julia2039') {
 //                         docker.image("julia2039/springboot:1.0").push()
                         myapp.push("latest")
                         myapp.push("${env.BUILD_ID}")
