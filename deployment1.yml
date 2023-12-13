@@ -1,34 +1,41 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mool
+  name: springboot
 spec:
+  strategy:
+    type: Recreate
   replicas: 3
   selector:
     matchLabels:
-      app: mool
+      app: springboot
   template:
     metadata:
       labels:
-        app: mool
+        app: springboot
+        tier: springboot
     spec:
       containers:
         - name: mool
-          image: julia2039/springboot:1.0
+          image: julia2039/springboot:latest
+          imagePullPolicy: Always
           ports:
-            - containerPort: 8080
+            - containerPort: 5000
+              name: springboot
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: springboot-service
+  name: springboot
 spec:
   selector:
-    app: mool
+    app: springboot
+    tier: springboot
   ports:
     - protocol: TCP
-      port: 80 # http 포트 open
-      targetPort: 8080
+      port: 80 # http 포트 open, 외부에 노출되는 port
+      targetPort: 5000 # 내부의 컨테이너에 전달되는 port
+  type: LoadBalancer
 #---
 #apiVersion: extensions/v1beta1
 #kind: Ingress
