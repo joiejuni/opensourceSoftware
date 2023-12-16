@@ -1,0 +1,79 @@
+/* styles.css */
+
+body {
+    font-family: 'Nanum Gothic', sans-serif;
+    background-color: #FFFFFF;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.heading {
+    position: relative;
+    font-family: 'Nanum Gothic';
+    font-weight: bold;
+    font-size: 22px;
+    color: #000000;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.scroll-container {
+    flex-grow: 1;
+    width: 80%;
+}
+
+.input-wrapper {
+    margin-bottom: 15px;
+}
+
+label {
+    margin-bottom: 10px;
+    font-family: 'Nanum Gothic';
+    font-weight: bold;
+    font-size: 16px;
+    color: #000000;
+    display: block;
+}
+
+.email-input-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+input {
+    width: 100%;
+    height: 40px;
+    background-color: #FFFFFF;
+    border: 1px solid #000000;
+    border-radius: 10px;
+    align-items: center;
+    padding: 0 10px;
+    box-sizing: border-box;
+    font-family: 'Nanum Gothic';
+}
+
+#btn-ordinary {
+    width: 100%;
+    height: 50px;
+    border: none;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    background-color: #0471F1;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
