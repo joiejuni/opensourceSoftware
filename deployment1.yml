@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: springboot
+spec:
+  strategy:
+    type: Recreate
+  replicas: 3
+  selector:
+    matchLabels:
+      app: springboot
+  template:
+    metadata:
+      labels:
+        app: springboot
+        tier: springboot
+    spec:
+      containers:
+        - name: springboot
+          image: julia2039/springboot:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+              name: springboot
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: springboot
+spec:
+  selector:
+    app: springboot
+    tier: springboot
+  ports:
+    - protocol: TCP
+      port: 80 # http 포트 open, 외부에 노출되는 port
+      targetPort: 8080 # 내부의 컨테이너에 전달되는 port
+  type: LoadBalancer
+#---
+#apiVersion: extensions/v1beta1
+#kind: Ingress
+#metadata:
+#  name: mool
+#  annotations:
+#    nginx.ingress.kubernetes.io/rewrite-target: /
+#spec:
+#  rules:
+#    - host: 34.64.72.16
+#      http:
+#        paths:
+#          - path: /
+#            backend:
+#              serviceName: springboot-service
+#              servicePort: 80
